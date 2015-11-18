@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "../lib",
+    "preserveConstEnums": true,
+    "removeComments": true
+  }
+}

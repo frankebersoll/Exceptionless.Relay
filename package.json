@@ -1,0 +1,43 @@
+{
+  "name": "exceptionless-relay",
+  "version": "0.0.1",
+  "description": "Relays Exceptionless events to another server (or relay).",
+  "license": "Apache-2.0",
+  "keywords": [
+    "exceptionless",
+    "error",
+    "feature",
+    "logging",
+    "tracking",
+    "reporting"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/frankebersoll/Exceptionless.JavaScript.git"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "preinstall": "tsd install",
+    "test": "gulp test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "del": "2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-tslint": "^3.1",
+    "gulp-typescript": "^2.9.2",
+    "should": "^7.1.1",
+    "source-map-support": "^0.3.3"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "main": "lib/index.js",
+  "directories": {
+    "test": "lib/tests/"
+  }
+}

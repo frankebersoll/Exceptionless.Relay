@@ -1,0 +1,78 @@
+{
+  "version": "0.1.0",
+  "command": "node_modules/.bin/gulp",
+  "isShellCommand": true,
+  "args": [
+    "--no-color"
+  ],
+  "tasks": [
+    {
+      "taskName": "build",
+      "isBuildCommand": true,
+      "problemMatcher": [
+        "$lessCompile",
+        "$tsc",
+        "$jshint"
+      ]
+    },
+    {
+      "taskName": "test",
+      "isTestCommand": true,
+      "problemMatcher": {
+        "fileLocation": [
+          "relative",
+          "${workspaceRoot}"
+        ],
+        "pattern": [
+          {
+            "regexp": "^not ok \\d+"
+          },
+          {
+            "regexp": "^[^:]+: (.+)$",
+            "message": 1
+          },
+          {
+            "regexp": "\\(([^:]+):(\\d+):(\\d+)\\)",
+            "file": 1,
+            "line": 2,
+            "column": 3
+          }
+        ]
+      }
+    },
+    {
+      "taskName": "watch",
+      "isWatching": true
+    },
+    {
+      "taskName": "bdd",
+      "isWatching": true,
+      "problemMatcher": {
+        "owner": "external",
+        "fileLocation": [
+          "relative",
+          "${workspaceRoot}/src"
+        ],
+        "watching": {
+          "beginsPattern": "Starting 'build'",
+          "endsPattern": "Finished 'test'"
+        },
+        "pattern": [
+          {
+            "regexp": "^not ok \\d+"
+          },
+          {
+            "regexp": "^[^:]+: (.+)$",
+            "message": 1
+          },
+          {
+            "regexp": "\\(/source/([^:]+):(\\d+):(\\d+)\\)",
+            "file": 1,
+            "line": 2,
+            "column": 3
+          }
+        ]
+      }
+    }
+  ]
+}
