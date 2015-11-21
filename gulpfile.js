@@ -1,10 +1,20 @@
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
-var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
+var path = require('path');
 
-var outDir = 'lib';
-var tsSources = 'src/**/*.ts';
+var outDir = 'out';
+var sources = [
+  'src/**/*.ts',
+  'specs/**/*.ts'
+];
+var typings = [
+  'typings/**/*.ts'
+];
+var sourcesToBuild = sources.concat(typings);
+var specsToRun = outDir + '/specs/**/*.js';
+
+var compilation;
 
 gulp.task('clean', function () {
   return del([outDir + '/**/*']);
@@ -12,46 +22,36 @@ gulp.task('clean', function () {
 
 gulp.task('tslint', function () {
   var tslint = require('gulp-tslint');
-  return gulp.src(tsSources)
+  return gulp.src(sources, { base: '.' })
     .pipe(tslint())
     .pipe(tslint.report('verbose'));
 });
 
-var tsProject;
-
 gulp.task('build', function () {
-  var typescript = require('gulp-typescript');
-  if (!tsProject) {
-    tsProject = typescript.createProject('src/tsconfig.json', {
-      noExternalResolve: true,
-      sortOutput: true
-    });
+  var typescript = require('gulp-tsb');
+  if (!compilation) {
+    compilation = typescript.create('./tsconfig.json');
   }
-  return gulp.src([tsSources])
-    .pipe(sourcemaps.init())
-    .pipe(typescript(tsProject))
-    .js
-    .pipe(sourcemaps.write())
+  return gulp.src(sourcesToBuild, { base: '.' })
+    .pipe(compilation())
     .pipe(gulp.dest(outDir));
 });
 
-gulp.task('watch', ['build'], function () {
-  gulp.watch(tsSources, ['build']);
-});
-
-function handleError(err) {
-  this.emit('end');
-}
-
 gulp.task('test', ['build'], function () {
-  return gulp.src('lib/specs/*.js')
+  return gulp.src(specsToRun)
     .pipe(mocha({
       reporter: 'tap',
       require: ['source-map-support/register']
     }))
-    .on('error', handleError);
+    .on('error', function () {
+      this.emit('end');
+    });
+});
+
+gulp.task('watch', ['build'], function () {
+  gulp.watch(sources, ['build']);
 });
 
 gulp.task('bdd', ['test'], function () {
-  gulp.watch(tsSources, ['test']);
+  gulp.watch(sources, ['test']);
 });

@@ -2,7 +2,7 @@
   "version": "v4",
   "repo": "borisyankov/DefinitelyTyped",
   "ref": "master",
-  "path": "src/typings",
+  "path": "./typings",
   "installed": {
     "node/node.d.ts": {
       "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"

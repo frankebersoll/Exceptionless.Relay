@@ -1,7 +1,8 @@
 import * as fs from 'fs';
+import * as server from './server';
 
 console.log("test");
 
 setTimeout(() => { console.log("asdf") }, 3000);
 
-console.log("ok");
+server.run();

@@ -8,12 +8,7 @@
   "tasks": [
     {
       "taskName": "build",
-      "isBuildCommand": true,
-      "problemMatcher": [
-        "$lessCompile",
-        "$tsc",
-        "$jshint"
-      ]
+      "isBuildCommand": true
     },
     {
       "taskName": "test",
@@ -32,7 +27,7 @@
             "message": 1
           },
           {
-            "regexp": "\\(([^:]+):(\\d+):(\\d+)\\)",
+            "regexp": "\\((?:\\.\\./)+([^:]+):(\\d+):(\\d+)\\)",
             "file": 1,
             "line": 2,
             "column": 3
@@ -51,7 +46,7 @@
         "owner": "external",
         "fileLocation": [
           "relative",
-          "${workspaceRoot}/src"
+          "${workspaceRoot}"
         ],
         "watching": {
           "beginsPattern": "Starting 'build'",
@@ -66,7 +61,7 @@
             "message": 1
           },
           {
-            "regexp": "\\(/source/([^:]+):(\\d+):(\\d+)\\)",
+            "regexp": "\\((?:\\.\\./)+([^:]+):(\\d+):(\\d+)\\)",
             "file": 1,
             "line": 2,
             "column": 3
